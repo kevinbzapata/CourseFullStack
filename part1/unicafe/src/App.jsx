@@ -2,14 +2,14 @@ import { useState } from 'react'
 
 const Statics = ({ good, neutral, bad }) => {
   const total = (good || neutral || bad) ? good + neutral + bad : 0
-  const percentPostive = good ? (good / total) * 100 : 0
-  const average = (good || bad) ? (good - bad) / total : 0;
+  const percentPostive = total ? (good / total) * 100 : 0
+  const average = total ? (good - bad) / total : 0;
 
   return (
     <>
       <Title title={"Statistics"} />
       {
-        (good || neutral || bad) > 0 ? (
+        total > 0 ? (
           <>
             <StatisticLine text={"good"} value={good} />
             <StatisticLine text={"neutral"} value={neutral} />
@@ -70,9 +70,6 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-
-
-
   return (
     <div>
       <Title title={"Give feedback"} />
@@ -81,18 +78,6 @@ const App = () => {
       <Button text={"bad"} onClick={() => setBad(bad + 1)} />
 
       <Statics good={good} neutral={neutral} bad={bad} />
-
-      {/* <Title title={"Statics"}/>
-
-        <Result text={"good"} count={good}/>
-        <Result text={"neutral"} count={neutral}/>
-        <Result text={"bad"} count={bad}/>
-        <Result text={"All : "} count={total}/>
-        <Result text={"avergage : "} count={average}/>
-        <Result text={"positive"} count={`${percentPostive} %`}/> */}
-
-
-
 
     </div>
   )
